@@ -1,0 +1,48 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .event {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .event h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .event p {
+    margin: 5px 0;
+  }
+  
+  .event ul {
+    margin: 10px 0;
+    padding-left: 20px;
+  }
+  
+  .event ul li {
+    margin-bottom: 5px;
+  }
+  
+  .event ul li a {
+    color: #0645ad;
+    text-decoration: none;
+  }
+  
+  .event ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  .loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  

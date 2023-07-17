@@ -1,13 +1,11 @@
+import React from 'react';
 import './App.css';
+import Main from './routes/routes';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          React app is running
-        </p>
-      </header>
+      <Main />
     </div>
   );
 }
