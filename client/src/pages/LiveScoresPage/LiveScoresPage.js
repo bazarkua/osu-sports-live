@@ -87,9 +87,10 @@ export default function LiveScoresPage() {
 
   return (
     <div className={styles.container}>
-      <h1>PAC 12 Live Events</h1>
+      
       <div className={styles.dropdown}>
-        <span>Select Sport:</span>
+      <h1>PAC 12 Live Events</h1>
+        <p>Select Sport:</p>
         <select value={selectedSport} onChange={(e) => handleSportChange(e.target.value)}>
           {sportOptions.map((option) => (
             <option key={option.value} value={option.value}>
@@ -104,7 +105,7 @@ export default function LiveScoresPage() {
             <div key={event.id} className={styles.event}>
               <h2>{event.title}</h2>
               <img src={event.images.medium} alt="Event Thumbnail" />
-              <p>Event ID: {event.id}</p>
+              {/* <p>Event ID: {event.id}</p> */}
               <p>Duration: {formatDuration(event.duration)}</p>
               {event.program_times && event.program_times.length > 0 && (
                 <>

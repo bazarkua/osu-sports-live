@@ -1,48 +1,75 @@
+/* UpcomingMatchesPage.module.css */
+
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .event {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .event h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .event p {
-    margin: 5px 0;
-  }
-  
-  .event ul {
-    margin: 10px 0;
-    padding-left: 20px;
-  }
-  
-  .event ul li {
-    margin-bottom: 5px;
-  }
-  
-  .event ul li a {
-    color: #0645ad;
-    text-decoration: none;
-  }
-  
-  .event ul li a:hover {
-    text-decoration: underline;
-  }
-  
-  .loadingContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-  }
-  
-  
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header{
+  text-align: center;
+}
+
+.eventContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #fcfcfc;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.event {
+  background-color: #212121;
+  color: white;
+  border: 2px solid #e74c3c;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.event:hover {
+  transform: scale(1.05);
+}
+
+.event h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.event p {
+  margin: 5px 0;
+}
+
+.loadingContainer {
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+/* Additional styles for links in the event description */
+.event a {
+  color: #0645ad;
+  text-decoration: none;
+}
+
+.event a:hover {
+  text-decoration: underline;
+}
+
+/* Styles for team logos */
+.logoContainer {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.logoContainer img {
+  height: 80px;
+  width: 80px;
+}

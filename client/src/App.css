@@ -14,10 +14,10 @@ footer {
   flex-shrink: 0;
 }
 .background-image {
-  background-image: url('../public/beaver.jpg');
+  background-image: url('../src/images/beaver.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  min-height: calc(100vh - 120px); /* Adjust the value based on your header and footer height */
+  min-height: calc(100vh); /* Adjust the value based on your header and footer height */
 }
