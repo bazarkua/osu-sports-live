@@ -1,12 +1,105 @@
-/* UpcomingMatchesPage.module.css */
+/* LiveEventsPage.module.css */
 
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.header{
+/* Typography styles */
+h2 {
+  font-size: 1.25rem;
+  font-family: var(--font-title);
+  color: var(--white);
+  line-height: 1.1;
+}
+
+p {
+  font-family: var(--font-text);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--white);
+}
+
+.flow > * + * {
+  margin-top: var(--flow-space, 1em);
+}
+
+/* CARD COMPONENT */
+
+.container {
+  max-width: auto;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  background: rgba(33, 33, 33, 0.5);
+  overflow-y: auto; /* Add this line to enable scrolling for the entire page */
+}
+
+.sportListContainer {
+  flex: 0 0 200px;
+  padding-left: 100px;
+  position: sticky;
+  top: 100px;
+  max-height: calc(100vh - 200px);
+}
+
+.sportIcons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 50px;
+  gap: 10px;
+}
+
+.eventListContainer {
+  flex: 3;
+  overflow-y: auto;
+  padding-top: 50px;
+}
+
+.sportIcon {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+}
+
+.sportIcon:hover {
+  border-color: #ddd;
+}
+
+.sportIcon.selected {
+  background-color: #ff5000;
+  border-color: #ff5000;
+  color: #fff;
+}
+
+.sportIcon.selected:hover {
+  background-color: #ff3800;
+}
+
+.sportIcon svg {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.sportIcon span {
+  font-size: 18px;
+}
+
+.eventList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.header {
   text-align: center;
 }
 
@@ -15,25 +108,29 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #fcfcfc;
   padding-bottom: 20px;
   margin-bottom: 20px;
 }
 
 .event {
-  background-color: #212121;
-  color: white;
-  border: 2px solid #e74c3c;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  width: 100%;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
+  display: grid;
+  place-items: center;
+  width: 80vw;
+  max-width: 48.875rem;
+  height: 15.125rem;
+  overflow: hidden;
+  background-color: rgba(33, 33, 33, 0.88);
+  border-radius: 0.625rem;
+  box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+  font-size: smaller;
+  position: relative; /* Add position relative to the card container */
 }
 
 .event:hover {
-  transform: scale(1.05);
+  background-image: url(https://web.archive.org/web/20160312084140im_/http://splatoon.nintendo.com/assets/img/nav-bg-fill-orange.png?1443460871);
+  background-repeat: repeat-x;
+  background-position: 100% -100%;
+  transition: 1.5s ease;
 }
 
 .event h2 {
@@ -46,7 +143,7 @@
 }
 
 .loadingContainer {
-  display: flex;  
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 200px;
@@ -56,10 +153,6 @@
 .event a {
   color: #0645ad;
   text-decoration: none;
-}
-
-.event a:hover {
-  text-decoration: underline;
 }
 
 /* Styles for team logos */

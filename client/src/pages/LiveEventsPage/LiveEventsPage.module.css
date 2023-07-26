@@ -1,16 +1,68 @@
 /* LiveEventsPage.module.css */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Typography styles */
+h2 {
+  font-size: 1.25rem;
+  font-family: var(--font-title);
+  color: var(--white);
+  line-height: 1.1;
+}
+
+p {
+  font-family: var(--font-text);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--white);
+}
+
+.flow > * + * {
+  margin-top: var(--flow-space, 1em);
+}
+
+/* CARD COMPONENT */
+
 .container {
-  max-width: 800px;
+  max-width: auto;
   margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  background: rgba(33, 33, 33, 0.5);
+  overflow-y: auto; /* Add this line to enable scrolling for the entire page */
+}
+
+.sportListContainer {
+  flex: 0 0 200px;
+  padding-left: 100px;
+  position: sticky;
+  top: 100px;
+  max-height: calc(100vh - 200px);
+}
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }
 
 .sportIcons {
   display: flex;
-  flex-direction: row; /* Change to row to make the list horizontal */
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   padding-top: 50px;
-  padding-bottom: 50px;
   gap: 10px;
+}
+
+.eventListContainer {
+  flex: 3;
+  overflow-y: auto;
+  padding-top: 50px;
 }
 
 .sportIcon {
@@ -46,67 +98,215 @@
   font-size: 18px;
 }
 
-/* Add this rule to remove underlines from links */
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.event {
-  /* ... (other styles) ... */
-  position: relative; /* Add this to create a stacking context */
-  overflow: hidden; /* Add this to hide any overflow content */
-  cursor: pointer; /* Add cursor pointer to indicate clickability */
-  background-color: #212121;
-  color: #ffffff;
-  border-radius: 8px;
-  margin-bottom: 50px;
-  padding: 60px;
-  width: 100%;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  transition: transform 0.9s ease-in-out, background-color 0.9s ease-in-out; /* Added background-color transition */
+.eventList {
   display: flex;
   flex-direction: column;
-  align-items: center; /* This will center the children elements */
-
-  border-radius: 8px;
-  text-align: center; /* Added text-align center to center the text */
+  align-items: center;
+  gap: 30px;
 }
 
-.event:hover {
-  transform: scale(1.05);
-  background-color: #e74c3c; /* Added a background color change on hover */
+/* CARD STYLES */
+
+.card {
+  display: grid;
+  place-items: center;
+  width: 80vw;
+  max-width: 48.875rem;
+  height: 15.125rem;
+  overflow: hidden;
+  border-radius: 0.625rem;
+  box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+  font-size: smaller;
+  position: relative; /* Add position relative to the card container */
 }
 
-.event h2 {
-  font-size: 20px;
+.card__background {
+  object-fit: cover;
+  max-width: 100%;
+  height: 100%;
+  transition: transform 500ms ease-in;
+}
+
+.card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 0;
+  background-color: rgba(33, 33, 33, 0.75); /* Change the background color to black */
+  overflow: hidden;
+  transition: height 500ms ease-out;
+  padding-left: 100px;
+  width: 100%;
+}
+
+.card:hover .card__overlay {
+  height: 100%;
+  width: 100%;
+}
+
+.card__overlay-content {
+  padding: 12px 16px;
+  text-align: left;
+  color: #fff; /* Set the text color to white */
+  height: 50%; /* Set the height to 50% of the card height */
+  transition: height 500ms ease-out;
+}
+
+.card:hover .card__overlay-content {
+  height: 100%; /* Adjust the height to fill the entire card */
+}
+
+.card__title {
+  position: absolute;
+  top: 16px; /* Move the title to the top of the card */
+  left: 16px; /* Add some padding from the top and left edges */
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7); /* Add a background color for the title */
+  padding: 8px 16px; /* Add some padding around the title */
+  border-radius: 0.625rem; /* Add border radius to match the card border */
+}
+
+.card__overlay h2 {
   margin-bottom: 10px;
 }
 
-.event p {
+.card__content {
+  --flow-space: 0.9375rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: flex-end;
+  height: 50%;
+  padding: 12% 1.25rem 1.875rem;
+  background: linear-gradient(
+    180deg,
+    hsla(0, 0%, 0%, 0) 0%,
+    hsla(0, 0%, 0%, 0.3) 10%,
+    hsl(0, 0%, 0%) 100%
+  );
+  transform: translateY(62%);
+  transition: transform 1500ms ease-out;
+  transition-delay: 1500ms;
+}
+
+.card__content--container {
+  --flow-space: 1.25rem;
+}
+
+.card__button {
+  padding: 0.75em 1.6em;
+  font-variant: small-caps;
+  font-weight: bold;
+  border-radius: 0.45em;
+  border: none;
+  background-color: var(--brand-color);
+  font-family: var(--font-title);
+  font-size: 1.125rem;
+  color: var(--black);
+  opacity: 0;
+  transition: transform 500ms ease-out, opacity 500ms ease-out;
+}
+
+.card__button:focus {
+  outline: 2px solid black;
+  outline-offset: -5px;
+}
+
+/* Event information overlay */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlayContent {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: left;
+}
+
+.overlay h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.overlay p {
   margin: 5px 0;
 }
 
-.event img {
-  max-width: 100%;
-  height: 200px;
-  object-fit: cover;
-  margin-bottom: 10px;
-  align-self: center;
+.overlay ul {
+  list-style: disc;
+  padding-left: 20px;
 }
 
-.event::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0%;
-  background-color: #e74c3c;
-  transition: width 0.9s ease-in-out;
-  z-index: -1; /* Move the pseudo-element behind the content */
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.event:hover::before {
-  width: 100%; /* Fill the entire width on hover */
+/* Media Query for card hover animation */
+/* Move the card hover animation styles outside the media query */
+
+
+.card__title::after {
+  opacity: 0;
+  transform: scaleX(0);
+  transition: opacity 1000ms ease-in, transform 500ms ease-out;
+  transition-delay: 500ms;
+  transform-origin: right;
+}
+
+.card__content--container > :not(.card__title),
+.card__button {
+  opacity: 0;
+  transition: transform 500ms ease-out, opacity 500ms ease-out;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: scale(1.05);
+  transition: transform 500ms ease-in;
+}
+
+.card:hover .card__content,
+.card:focus-within .card__content {
+  transform: translateY(0);
+  transition: transform 500ms ease-in;
+}
+
+.card:focus-within .card__content {
+  transition-duration: 0ms;
+}
+
+.card:hover .card__background,
+.card:focus-within .card__background {
+  transform: scale(1.3);
+}
+
+.card:hover .card__content--container > :not(.card__title),
+.card:hover .card__button,
+.card:focus-within .card__content--container > :not(.card__title),
+.card:focus-within .card__button {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+  transition-delay: 1000ms;
+}
+
+.card:hover .card__title::after,
+.card:focus-within .card__title::after {
+  opacity: 1;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: opacity 500ms ease-in, transform 500ms ease-in;
+  transition-delay: 500ms;
 }

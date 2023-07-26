@@ -1,6 +1,5 @@
-// Navbar.js
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom"; // Import NavLink instead of Link
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -18,31 +17,34 @@ function Navbar() {
         <img src={logo} alt="OSU logo" className="logo" />
         <ul className="nav-links">
           <li>
-            <Link to="/">
+            <NavLink exact to="/" activeClassName="active">
+              {/* Use activeClassName prop to apply 'active' class to the active link */}
               <FontAwesomeIcon icon={faHome} />
-              <span>Home</span>
-            </Link>
+              <span>About</span>
+            </NavLink>
           </li>
           <li>
-            <Link to="/live">
+            <NavLink to="/live" activeClassName="active">
+              {/* Use activeClassName prop to apply 'active' class to the active link */}
               <FontAwesomeIcon icon={faPlayCircle} />
               <span>PAC 12 Live Events</span>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/upcoming">
+            <NavLink to="/upcoming" activeClassName="active">
+              {/* Use activeClassName prop to apply 'active' class to the active link */}
               <FontAwesomeIcon icon={faCalendarAlt} />
               <span>Upcoming Matches</span>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/contact">
+            <NavLink to="/contact" activeClassName="active">
+              {/* Use activeClassName prop to apply 'active' class to the active link */}
               <FontAwesomeIcon icon={faEnvelope} />
               <span>Contact Us</span>
-            </Link>
+            </NavLink>
           </li>
         </ul>
-        <h1>OSU Sports Live</h1>
       </div>
     </nav>
   );

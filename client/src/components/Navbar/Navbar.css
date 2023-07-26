@@ -1,7 +1,7 @@
 /* Navbar.css */
 nav {
   color: #ffffff;
-  background: rgba(33, 33, 33, 0.95);
+  background: rgba(33, 33, 33);
   height: 120px; /* Set the height of the navbar */
 }
 
@@ -23,9 +23,11 @@ nav .logo {
 nav .nav-links {
   display: flex;
   align-items: center;
+  justify-content: center; /* Add this line to center the links horizontally */
   list-style: none;
-  margin-right: 20px; /* Add some right margin for the nav links */
   padding: 0;
+  height: 100%; /* Set the height of the nav links container to match the nav height */
+  flex: 1; /* Add this line to make the nav links container take up the available space */
 }
 
 nav .nav-links li {
@@ -88,4 +90,11 @@ nav .nav-links li a:hover {
   nav .nav-links li {
     padding: 10px;
   }
+}
+nav .nav-links li a.active {
+  color: #ff5000;
+}
+
+nav .nav-links li a.active::before {
+  transform: scaleX(1);
 }
