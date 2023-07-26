@@ -1,12 +1,12 @@
 .footer {
-    background-color: #212121;
-    color: #FF5000;
-    padding: 20px 0;
-    text-align: center;
-    width: 100%;
+  background-color: rgba(33, 33, 33);
+  color: #ff5000;
+  padding: 20px 0;
+  text-align: center;
+  width: 100%;
 }
 
 .container {
-    width: 80%;
-    margin: 0 auto;
+  width: 80%;
+  margin: 0 auto;
 }

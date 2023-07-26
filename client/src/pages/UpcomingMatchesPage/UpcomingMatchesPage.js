@@ -32,20 +32,20 @@ export default function UpcomingMatchesPage() {
         const response = await axios.request(options);
         if (response.data.events) {
           // Filter events for those including "Oregon State" in the title
-          const osuEvents = response.data.events.filter(event =>
-            event.title.includes('Oregon State')
+          const osuEvents = response.data.events.filter((event) =>
+            event.title.includes("Oregon State")
           );
           setEvents(osuEvents);
         } else {
-          console.log('No upcoming events available.');
+          console.log("No upcoming events available.");
           setEvents([]);
         }
         setIsLoading(false); // Set isLoading to false once events are loaded
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
-  
+
     fetchData();
   }, []);
 
@@ -69,9 +69,13 @@ export default function UpcomingMatchesPage() {
             const title = event.title
               .replace(/ at /gi, " vs. ")
               .replace(/vs /gi, "vs. ");
-  
+
             return (
-              <div key={event.id} className={styles.eventContainer} onClick={() => window.location.href = event.url}>
+              <div
+                key={event.id}
+                className={styles.eventContainer}
+                onClick={() => (window.location.href = event.url)}
+              >
                 <div className={styles.event}>
                   <h2>{title}</h2>
                   <p>
