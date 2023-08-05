@@ -20,7 +20,7 @@ const Main = () => {
           <Route path="/contact" element={<ContactPage />} />
           {/* Add other routes as you create new pages */}
         </Routes>
-      </div>
+        </div>
       <Footer />
     </Router>
   );

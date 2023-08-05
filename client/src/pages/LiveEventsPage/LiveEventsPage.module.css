@@ -31,19 +31,27 @@ p {
 .container {
   max-width: auto;
   margin: 0 auto;
-  height: 100vh;
+  height: auto;
   display: flex;
-  background: rgba(33, 33, 33, 0.5);
-  overflow-y: auto; /* Add this line to enable scrolling for the entire page */
+  flex-direction: column; /* Updated to column */
+  padding-bottom: 40px;
+  
+  
+  
 }
 
+
 .sportListContainer {
-  flex: 0 0 200px;
-  padding-left: 100px;
-  position: sticky;
-  top: 100px;
-  max-height: calc(100vh - 200px);
+   /* push the content to the right */
+  padding-left: 42px; /* adjust as per your needs */
+  top: 0px;
+  padding-bottom: 26px;
+  z-index: 1; /* Add to stack it below the navbar */
+  
+  
 }
+
+
 .loadingContainer {
   display: flex;
   justify-content: center;
@@ -53,16 +61,12 @@ p {
 
 .sportIcons {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap; /* Allow icons to wrap onto next row if width is not enough */
   align-items: flex-start;
   padding-top: 50px;
   gap: 10px;
-}
-
-.eventListContainer {
-  flex: 3;
-  overflow-y: auto;
-  padding-top: 50px;
+  margin-left: 20rem;
 }
 
 .sportIcon {
@@ -72,6 +76,7 @@ p {
   padding: 10px;
   border: 2px solid transparent;
   border-radius: 10px;
+  background-color: #23232e;
 }
 
 .sportIcon:hover {
@@ -97,12 +102,19 @@ p {
 .sportIcon span {
   font-size: 18px;
 }
-
+.eventListContainer {
+  flex: 1; /* Updated to 1 */
+  
+  padding-top: 50px;
+}
 .eventList {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
+  flex-direction: row;
+  flex-wrap: wrap; /* Allow icons to wrap onto next row if width is not enough */
+  align-items: flex-start;
+  
+  gap: 20px;
+  margin-left: 18rem;
 }
 
 /* CARD STYLES */
@@ -110,14 +122,16 @@ p {
 .card {
   display: grid;
   place-items: center;
-  width: 80vw;
+  width: 40vw;
   max-width: 48.875rem;
   height: 15.125rem;
   overflow: hidden;
   border-radius: 0.625rem;
-  box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0.25rem 0.25rem 0.75rem rgba(0, 0, 0, 0.925);
   font-size: smaller;
   position: relative; /* Add position relative to the card container */
+  border: 3px solid;
+  border-color: #23232e;
 }
 
 .card__background {
@@ -132,7 +146,12 @@ p {
   bottom: 0;
   left: 0;
   height: 0;
-  background-color: rgba(33, 33, 33, 0.75); /* Change the background color to black */
+  background-color: rgba(
+    33,
+    33,
+    33,
+    0.75
+  ); /* Change the background color to black */
   overflow: hidden;
   transition: height 500ms ease-out;
   padding-left: 100px;
@@ -164,6 +183,28 @@ p {
   background-color: rgba(0, 0, 0, 0.7); /* Add a background color for the title */
   padding: 8px 16px; /* Add some padding around the title */
   border-radius: 0.625rem; /* Add border radius to match the card border */
+  transition: opacity 5000ms ease-in-out; /* Add opacity transition */
+}
+
+.card:hover .card__title {
+  opacity: 0; /* Set the opacity to 0 on hover */
+}
+
+.card__title::after {
+  content: ""; /* Add a pseudo-element to preserve layout */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Match the title's background color */
+  border-radius: 0.625rem; /* Add border radius to match the card border */
+  opacity: 1; /* Set opacity to 1 to keep the overlay visible on hover */
+  transition: opacity 5000ms ease-in-out; /* Add opacity transition */
+}
+
+.card:hover .card__title::after {
+  opacity: 0; /* Set the overlay opacity to 0 on hover */
 }
 
 .card__overlay h2 {
@@ -204,13 +245,10 @@ p {
   font-size: 1.125rem;
   color: var(--black);
   opacity: 0;
-  transition: transform 500ms ease-out, opacity 500ms ease-out;
+  transition: transform 200ms ease-out, opacity 200ms ease-out;
+  background-color: #ff5000;
 }
 
-.card__button:focus {
-  outline: 2px solid black;
-  outline-offset: -5px;
-}
 
 /* Event information overlay */
 
@@ -241,7 +279,7 @@ p {
 }
 
 .overlay p {
-  margin: 5px 0;
+  margin: 0px 0;
 }
 
 .overlay ul {
@@ -256,7 +294,6 @@ p {
 
 /* Media Query for card hover animation */
 /* Move the card hover animation styles outside the media query */
-
 
 .card__title::after {
   opacity: 0;
@@ -299,7 +336,13 @@ p {
 .card:focus-within .card__button {
   opacity: 1;
   transition: opacity 500ms ease-in;
-  transition-delay: 1000ms;
+  transition-delay: 200ms;
+}
+
+.card__button:hover{
+  background-color: #23232e;
+    transition: 300ms ease-in-out;
+    color: #ff5000;
 }
 
 .card:hover .card__title::after,
@@ -309,4 +352,38 @@ p {
   transform-origin: left;
   transition: opacity 500ms ease-in, transform 500ms ease-in;
   transition-delay: 500ms;
+}
+
+@media only screen and (max-width: 1200px) {
+  .sportListContainer {
+    padding-left: 20px; /* Reduce padding for smaller screens */
+  }
+
+  .sportIcons {
+    flex-wrap: wrap; /* Allow icons to wrap onto the next row for smaller screens */
+    justify-content: center; /* Center the icons horizontally */
+    margin-left: 0; /* Remove left margin for smaller screens */
+    padding-top: 20px; /* Adjust padding for smaller screens */
+  }
+
+  .eventListContainer {
+    padding-top: 20px; /* Adjust padding for smaller screens */
+    margin-left: -10rem;
+  }
+
+  .card {
+    width: 90vw; /* Adjust card width for smaller screens */
+    max-width: none; /* Remove max-width for smaller screens */
+    height: auto; /* Adjust height to auto for smaller screens */
+    right: 7vh;
+  }
+
+  .card__title {
+    top: 8px; /* Move the title closer to the top for smaller screens */
+    left: 8px; /* Adjust left padding for smaller screens */
+  }
+
+  .card__overlay-content {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
 }

@@ -10,6 +10,10 @@ import {
   faRunning,
   faSoccerBall,
   faVolleyballBall,
+  faGolfBall,
+  faShip,
+  faPersonFalling,
+  faBaseballBatBall,
 } from "@fortawesome/free-solid-svg-icons";
 
 const COLORS = {
@@ -23,6 +27,7 @@ export default function LiveEventsPage() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [allSports, setAllSports] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedSportId, setSelectedSportId] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +38,7 @@ export default function LiveEventsPage() {
             pagesize: 10,
             sort: "ASC",
             ignore_hidden_canceled: true,
-            school: 18,
+            
           },
           headers: {
             Accept: "application/json",
@@ -76,9 +81,17 @@ export default function LiveEventsPage() {
     fetchAllSports();
   }, []);
 
-  const handleSportChange = (sport) => {
-    console.log("Selected Sport:", sport);
-    setSelectedSport(sport);
+  const handleSportChange = (selectedSportValue) => {
+    const selectedSport = allSports.find(
+      (sport) => sport.name === selectedSportValue
+    );
+    const selectedSportId = selectedSport ? selectedSport.id : "";
+
+    console.log("Selected Sport Name:", selectedSportValue);
+    console.log("Selected Sport ID:", selectedSportId);
+
+    setSelectedSport(selectedSportValue); // This is for styling
+    setSelectedSportId(selectedSportId); // This is for filtering
   };
 
   useEffect(() => {
@@ -86,15 +99,19 @@ export default function LiveEventsPage() {
   }, [allSports]);
 
   useEffect(() => {
-    console.log("Selected Sport ID:", selectedSport);
-    const filteredEvents = selectedSport
+    console.log("All Events:", events);
+  }, [events]);
+
+  useEffect(() => {
+    console.log("Selected Sport ID:", selectedSportId);
+    const filteredEvents = selectedSportId
       ? events?.filter((event) => {
-          return event.sports?.some((sport) => sport.id === selectedSport);
+          return event.sports?.some((sport) => sport.id === selectedSportId);
         }) ?? []
       : events ?? [];
 
     console.log("Filtered Events:", filteredEvents);
-  }, [selectedSport, events]);
+  }, [selectedSportId, events]);
 
   const formatTime = (timeString) => {
     const options = {
@@ -106,7 +123,8 @@ export default function LiveEventsPage() {
       hour12: true,
       timeZoneName: "short",
     };
-    return new Date(timeString).toLocaleString("en-US", options);
+    const formattedTime = new Date(timeString).toLocaleString("en-US", options);
+    return formattedTime.replace("GMT", "");
   };
 
   const formatDuration = (duration) => {
@@ -115,9 +133,9 @@ export default function LiveEventsPage() {
     return `${parseInt(hours, 10)} hour ${parseInt(minutes, 10)} mins`;
   };
 
-  const filteredEvents = selectedSport
+  const filteredEvents = selectedSportId
     ? events?.filter((event) => {
-        return event.sports?.some((sport) => sport.id === selectedSport);
+        return event.sports?.some((sport) => sport.id === selectedSportId);
       }) ?? []
     : events ?? [];
 
@@ -133,26 +151,59 @@ export default function LiveEventsPage() {
 
   const sportOptions = [
     { label: "All Sports", value: "" },
-    { label: "Men's Baseball", value: "Baseball", icon: faBaseballBall },
-    { label: "Men's Basketball", value: "Basketball", icon: faBasketballBall },
+    { label: "Men's Baseball", value: "Baseball", icon: faBaseballBatBall },
+    {
+      label: "Men's Basketball",
+      value: "Men's Basketball",
+      icon: faBasketballBall,
+    },
+    {
+      label: "Women's Basketball",
+      value: "Women's Basketball",
+      icon: faBasketballBall,
+    },
     { label: "Football", value: "Football", icon: faFootballBall },
-    { label: "Women's Running", value: "Running", icon: faRunning },
-    { label: "Men's Soccer", value: "Soccer", icon: faSoccerBall },
+    { label: "Women's Track & Field", value: "Track & Field", icon: faRunning },
+    { label: "Men's Soccer", value: "Men's Soccer", icon: faSoccerBall },
+    { label: "Women's Soccer", value: "Women's Soccer", icon: faSoccerBall },
+    {
+      label: "Men's Volleyball",
+      value: "Men's Volleyball",
+      icon: faVolleyballBall,
+    },
     {
       label: "Women's Volleyball",
-      value: "Volleyball",
+      value: "Women's Volleyball",
       icon: faVolleyballBall,
     },
     // Add other sports here
+    {
+      label: "Women's Cross Country",
+      value: "Women's Cross Country",
+      icon: faRunning,
+    },
+    { label: "Men's Golf", value: "Men's Golf", icon: faGolfBall },
+    { label: "Women's Golf", value: "Women's Golf", icon: faGolfBall },
+    {
+      label: "Women's Gymnastics",
+      value: "Women's Gymnastics",
+      icon: faPersonFalling,
+    },
+    { label: "Women's Rowing", value: "Women's Rowing", icon: faShip },
+    {
+      label: "Women's Softball",
+      value: "Women's Softball",
+      icon: faBaseballBall,
+    },
   ];
 
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.sportListContainer}>
         <div className={styles.sportIcons}>
           {sportOptions.map((option) => (
             <div
-              key={option.value}
+              key={option.id}
               className={`${styles.sportIcon} ${
                 selectedSport === option.value ? styles.selected : ""
               }`}
@@ -164,71 +215,71 @@ export default function LiveEventsPage() {
           ))}
         </div>
       </div>
-      <div className={styles.eventListContainer}>
-        {isLoading ? (
-          <div
-            className={`${styles.loadingContainer} ${styles.loadingContainer}`}
-          >
-            <TailSpin
-              type="TailSpin"
-              color={COLORS.primary}
-              height={60}
-              width={60}
-            />
-          </div>
-        ) : (
-          <div className={styles.eventList}>
-            {filteredEvents.length > 0 ? (
-              filteredEvents.map((event) => (
-                <div
-                  key={event.id}
-                  className={styles.card}
-                  onClick={() => handleCardClick(event)}
-                >
-                  <h2 className={styles.card__title}>{event.title}</h2>
-                  <img
-                    className={styles.card__background}
-                    src={event.images?.medium}
-                    alt="Event Thumbnail"
-                  />
-                  <div className={styles.card__overlay}>
-                    <div className={styles.card__overlayContent}>
-                      <p className={styles.card__description}>
-                        Duration: {formatDuration(event.duration)}
-                      </p>
+
+      <div className={styles.container}>
+        <div className={styles.eventListContainer}>
+          {isLoading ? (
+            <div
+              className={`${styles.loadingContainer} ${styles.loadingContainer}`}
+            >
+              <TailSpin
+                type="TailSpin"
+                color={COLORS.primary}
+                height={60}
+                width={60}
+              />
+            </div>
+          ) : (
+            <div className={styles.eventList}>
+              {filteredEvents.length > 0 ? (
+                filteredEvents.map((event) => (
+                  <div
+                    key={event.id}
+                    className={styles.card}
+                    onClick={() => handleCardClick(event)}
+                  >
+                    <h2 className={styles.card__title}>{event.title}</h2>
+                    <img
+                      className={`${styles.card__background} ${styles.card__photo}`}
+                      src={event.images?.medium}
+                      alt="Event Thumbnail"
+                    />
+                    <div className={styles.card__overlay}>
+                      <div className={styles.card__overlayContent}>
                       {event.program_times &&
                         event.program_times.length > 0 && (
                           <>
+                            {/* Update the time and duration display */}
                             <p className={styles.card__description}>
-                              Start Time:{" "}
-                              {formatTime(event.program_times[0].start_time)}
-                            </p>
-                            <p className={styles.card__description}>
-                              End Time:{" "}
+                              {formatTime(event.program_times[0].start_time)} to{" "}
                               {formatTime(event.program_times[0].end_time)}
                             </p>
-                            <button
-                              className={styles.card__description}
-                              onClick={handleReadMoreClick}
-                            >
-                              Read More
-                            </button>
-                          </>
-                        )}
+                            <p className={styles.card__description}>
+                              Duration: {formatDuration(event.duration)}
+                            </p>
+                              <button
+                                className={styles.card__button}
+                                onClick={handleReadMoreClick}
+                              >
+                                Launch Pac-12 Live
+                              </button>
+                            </>
+                          )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
-            ) : (
-              <p>
-                {selectedSport
-                  ? `No live events available for ${selectedSport}.`
-                  : "No live events available."}
-              </p>
-            )}
-          </div>
-        )}
+                ))
+              ) : (
+                <p>
+                  {selectedSport
+                    ? `No live events currently available for ${selectedSport}.`
+                    : "No live events currently available."}
+                </p>
+              )}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -1,16 +1,16 @@
-import React from 'react';
-import './Footer.css';
+import React from "react";
+import "./Footer.css";
 
 const Footer = () => {
-    const year = new Date().getFullYear();
+  const year = new Date().getFullYear();
 
-    return (
-        <footer className="footer">
-            <div className="container">
-                <p>&copy; {year} OSU Sports Live. All rights reserved.</p>
-            </div>
-        </footer>
-    );
-}
+  return (
+    <footer className="footer">
+      <div className="container">
+        <p>&copy; {year} OSU Sports Live. Made by Adilbek Bazarkulov</p>
+      </div>
+    </footer>
+  );
+};
 
 export default Footer;

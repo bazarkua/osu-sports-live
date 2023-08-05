@@ -1,100 +1,180 @@
-/* Navbar.css */
-nav {
-  color: #ffffff;
-  background: rgba(33, 33, 33);
-  height: 120px; /* Set the height of the navbar */
+:root {
+  font-size: 16px;
+  font-family: "Open Sans";
+  --text-primary: #ffffff; /* changing primary text color to white for icons */
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #23232e;
+  --transition-speed: 600ms;
 }
 
-nav .header {
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  justify-content: space-between;
+body {
+  color: rgb(211, 205, 205);
+  background-color: white;
+  margin: 0;
+  padding: 0;
 }
 
-nav .header h1 {
-  margin-left: 20px;
+body::-webkit-scrollbar {
+  width: 0.25rem;
 }
 
-nav .logo {
-  height: 50px;
+.navbar {
+  position: fixed;
+  background-color: var(--bg-primary);
+  width: 5rem;
+  height: 100vh;
+  transition: width 600ms ease-in-out;
+  border-right: solid 5px;
+  border-color: #ff5000;
+  box-shadow: 0.15rem 0.15rem 0.55rem rgba(255, 115, 0, 0.925);
+  overflow: hidden;
+  z-index: 10;
+  display: flex; /* Add this line to make flex-direction work */
+  flex-direction: column; /* Move flex-direction from .navbar-nav to .navbar */
 }
 
-nav .nav-links {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Add this line to center the links horizontally */
+.navbar-nav {
   list-style: none;
   padding: 0;
-  height: 100%; /* Set the height of the nav links container to match the nav height */
-  flex: 1; /* Add this line to make the nav links container take up the available space */
-}
-
-nav .nav-links li {
-  padding: 15px;
-}
-
-nav .nav-links li:not(:last-child) {
-  margin-right: 100px; /* Add margin between nav links */
-}
-
-nav .nav-links li a {
+  margin: 0;
+  /* justify-content: center; Remove this line */
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Move flex-direction from here to .navbar */
   align-items: center;
-  text-decoration: none;
-  color: white;
-  position: relative;
+  height: 100%;
 }
 
-nav .nav-links li a span {
-  margin-top: 5px;
-}
-
-nav .nav-links li a svg {
-  width: 20px;
-  height: 20px;
-}
-
-nav .nav-links li a::before {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
+.nav-item {
   width: 100%;
-  height: 2px;
-  background-color: #ff5000;
-  transform: scaleX(0);
-  transition: transform 0.3s ease-in-out;
-  transform-origin: left;
 }
 
-nav .nav-links li a:hover::before {
-  transform: scaleX(1);
+.nav-item:last-child {
+  margin-top: auto;
+  padding-bottom: 50px;
 }
 
-nav .nav-links li a:hover {
-  color: #ff5000;
+.navbar:hover {
+  transition: width 600ms ease-in-out;
+  width: 22rem;
+  overflow: visible;
 }
 
-@media screen and (max-width: 600px) {
-  nav .header h1 {
-    margin-left: 0;
+.nav-link {
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  color: var(--text-primary);
+  text-decoration: none !important;
+  filter: grayscale(100%) opacity(0.7);
+  transition: var(--transition-speed);
+  min-width: 26rem;
+  flex-wrap: nowrap;
+}
+
+.nav-link:hover {
+  filter: grayscale(0%) opacity(1);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.link-text {
+  display: none;
+  margin-left: 1rem;
+  color: var(--text-secondary);
+  text-decoration: none !important;
+  transition: var(--transition-speed);
+  transition-delay: 2600ms;
+}
+
+.nav-icon {
+  width: 5rem; /* Making icons bigger */
+  min-width: 5rem; /* Making icons bigger */
+  margin: 0 1.5rem;
+  font-size: 30px;
+  padding-top: 45px;
+  color: var(--text-primary);
+}
+
+.logo {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  font-size: 1.5rem;
+}
+
+.logo svg {
+  transform: rotate(0deg);
+  transition: var(--transition-speed);
+}
+
+.logo-text {
+  display: inline;
+  position: absolute;
+  left: -999px;
+  transition: var(--transition-speed);
+}
+
+.navbar:hover .logo svg {
+  transform: rotate(-180deg);
+}
+
+.navbar:hover .link-text {
+  display: inline;
+}
+
+@media only screen and (max-width: 1200px) {
+  .navbar {
+    bottom: 0;
+    width: 100vw;
+    height: 5rem;
+    transition: height 600ms ease-in-out;
   }
 
-  nav .nav-links {
-    flex-direction: column;
-    margin-right: 0;
+  .navbar:hover {
+    overflow: visible;
+    width: 100vw;
+    height: 12rem;
+    transition: height 600ms ease-in-out;
+  }
+  
+  .logo {
+    display: none;
   }
 
-  nav .nav-links li {
-    padding: 10px;
+  .navbar-nav {
+    flex-direction: row;
+  }
+
+  .nav-link {
+    justify-content: center;
+  }
+
+  .link-text {
+    display: none; /* Hide link-text on smaller screens */
+  }
+
+  main {
+    margin: 0;
   }
 }
-nav .nav-links li a.active {
-  color: #ff5000;
-}
 
-nav .nav-links li a.active::before {
-  transform: scaleX(1);
+@media only screen and (min-width: 1200px) {
+  .navbar {
+    top: 0;
+    width: 10rem;
+    height: 100vh;
+  }
+  
+
+  .navbar:hover .logo svg {
+    margin-left: 11rem;
+  }
+
+  .navbar:hover .logo-text {
+    left: 0px;
+  }
 }
