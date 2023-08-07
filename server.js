@@ -12,8 +12,8 @@ app.use(express.json());
 app.use(cors());
 
 // MongoDB Atlas connection string
-const uri =
-  "mongodb+srv://adilbekbazarkulov1:voum1lsNZRtGlnkw@cluster0.0ndjkpx.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_URI;
+
 
 // Contact route handler
 app.post("/api/contact", async (req, res) => {

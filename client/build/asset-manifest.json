@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.aaeb7fb2.css",
+    "main.js": "/static/js/main.5dc2b667.js",
+    "static/media/sketch.jpg": "/static/media/sketch.4855f94d9b6fef77ac51.jpg",
+    "static/media/go_beaves.png": "/static/media/go_beaves.39a7e483f82adc5cdae4.png",
+    "static/media/mern-stack.jpg": "/static/media/mern-stack.72332dbd8a1d6222ec1b.jpg",
+    "static/media/beaver.jpg": "/static/media/beaver.8c79c579d92aa73dfa26.jpg",
+    "static/media/osu-logo.png": "/static/media/osu-logo.224332b858053e89ff83.png",
+    "index.html": "/index.html",
+    "main.aaeb7fb2.css.map": "/static/css/main.aaeb7fb2.css.map",
+    "main.5dc2b667.js.map": "/static/js/main.5dc2b667.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aaeb7fb2.css",
+    "static/js/main.5dc2b667.js"
+  ]
+}
