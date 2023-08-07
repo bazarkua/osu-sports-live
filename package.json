@@ -8,8 +8,8 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "cd client && npm run build",
-    "deploy": "vercel --prod"
+    "vercel-build": "npm run build && cd client && npm install && npm run build",
+    "vercel-start": "node server.js"
   },
   "name": "osu-sports-live",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
