@@ -1,10 +1,10 @@
 .container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 35px;
   margin-top: 200px;
   text-align: center;
-  background-color: rgb(33, 33, 33);
+  background-color: #23232e;
   border-radius: 8px;
 }
 
@@ -28,12 +28,20 @@ textarea {
 }
 
 button {
-  padding: 10px 20px;
-  background-color: #ff5000; /* OSU orange color */
-  color: #fff;
-  border: none;
-  border-radius: 4px;
+  padding: 0.75em 1.6em;
   cursor: pointer;
+  font-weight: bold;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  border-radius: 0.45em;
+  border: none;
+  background-color: #ff5000;
+  transition: transform 500ms ease-out, opacity 500ms ease-out;
+}
+
+button:hover{
+  background-color: #ffffff;
+    transition: 300ms ease-in-out;
+    color: #ff5000;
 }
 
 .successMessage {

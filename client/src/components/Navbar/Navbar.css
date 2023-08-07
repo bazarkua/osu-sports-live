@@ -1,7 +1,7 @@
 :root {
   font-size: 16px;
   font-family: "Open Sans";
-  --text-primary: #ffffff; /* changing primary text color to white for icons */
+  --text-primary: #ffffff;
   --text-secondary: #ececec;
   --bg-primary: #23232e;
   --bg-secondary: #23232e;
@@ -10,7 +10,6 @@
 
 body {
   color: rgb(211, 205, 205);
-  background-color: white;
   margin: 0;
   padding: 0;
 }
@@ -30,23 +29,24 @@ body::-webkit-scrollbar {
   box-shadow: 0.15rem 0.15rem 0.55rem rgba(255, 115, 0, 0.925);
   overflow: hidden;
   z-index: 10;
-  display: flex; /* Add this line to make flex-direction work */
-  flex-direction: column; /* Move flex-direction from .navbar-nav to .navbar */
+  display: flex;
+  flex-direction: column;
 }
 
 .navbar-nav {
   list-style: none;
   padding: 0;
   margin: 0;
-  /* justify-content: center; Remove this line */
+  justify-content: flex-start;
   display: flex;
-  flex-direction: column; /* Move flex-direction from here to .navbar */
-  align-items: center;
+  flex-direction: column;
   height: 100%;
+  
 }
 
 .nav-item {
   width: 100%;
+  padding-top: 45px;
 }
 
 .nav-item:last-child {
@@ -61,39 +61,41 @@ body::-webkit-scrollbar {
 }
 
 .nav-link {
+  position: relative;
   display: flex;
   align-items: center;
   height: 5rem;
-  color: var(--text-primary);
+  color: #ff5000;
   text-decoration: none !important;
-  filter: grayscale(100%) opacity(0.7);
+  
   transition: var(--transition-speed);
-  min-width: 26rem;
+  min-width: 6rem;
   flex-wrap: nowrap;
 }
 
 .nav-link:hover {
   filter: grayscale(0%) opacity(1);
   background: var(--bg-secondary);
-  color: var(--text-secondary);
+  color: #ff5000;
 }
 
 .link-text {
   display: none;
   margin-left: 1rem;
-  color: var(--text-secondary);
+  color: #ffffff;
   text-decoration: none !important;
   transition: var(--transition-speed);
   transition-delay: 2600ms;
+  padding-top: 45px;
 }
 
 .nav-icon {
-  width: 5rem; /* Making icons bigger */
-  min-width: 5rem; /* Making icons bigger */
+  width: 5rem;
+  min-width: 5rem;
   margin: 0 1.5rem;
   font-size: 30px;
   padding-top: 45px;
-  color: var(--text-primary);
+  color: #ffffff;
 }
 
 .logo {
@@ -101,7 +103,7 @@ body::-webkit-scrollbar {
   text-transform: uppercase;
   margin-bottom: 1rem;
   text-align: center;
-  color: var(--text-secondary);
+  color: #ff5000;
   background: var(--bg-secondary);
   font-size: 1.5rem;
 }
@@ -114,6 +116,8 @@ body::-webkit-scrollbar {
 .logo-text {
   display: inline;
   position: absolute;
+  padding-top: 95px;
+  margin-left: 60px;
   left: -999px;
   transition: var(--transition-speed);
 }
@@ -126,27 +130,65 @@ body::-webkit-scrollbar {
   display: inline;
 }
 
+.nav-link.active {
+  color: #ff5000;
+}
+
+.nav-link .nav-icon.active {
+  color: #ff5000;
+}
+
+.nav-link::before,
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  height: 3px;
+  background-color: #ff5000;
+  width: 0;
+  transition: width 0.3s;
+}
+
+.nav-link::before {
+  left: 0;
+}
+
+.nav-link::after {
+  right: 0;
+}
+
+.nav-link:hover::before,
+.nav-link:hover::after {
+  width: 50%;
+}
+
 @media only screen and (max-width: 1200px) {
   .navbar {
     bottom: 0;
     width: 100vw;
     height: 5rem;
-    transition: height 600ms ease-in-out;
+    height: auto;
+    transition: height 1200ms ease-in-out;
   }
 
   .navbar:hover {
     overflow: visible;
     width: 100vw;
-    height: 12rem;
-    transition: height 600ms ease-in-out;
+    height: auto;
+    transition: height 1200ms ease-in-out;
   }
-  
+
   .logo {
     display: none;
   }
 
   .navbar-nav {
     flex-direction: row;
+    justify-content: center;
+  }
+
+  .nav-item {
+    width: auto;
   }
 
   .nav-link {
@@ -154,7 +196,7 @@ body::-webkit-scrollbar {
   }
 
   .link-text {
-    display: none; /* Hide link-text on smaller screens */
+    display: none;
   }
 
   main {
@@ -168,7 +210,6 @@ body::-webkit-scrollbar {
     width: 10rem;
     height: 100vh;
   }
-  
 
   .navbar:hover .logo svg {
     margin-left: 11rem;
@@ -178,3 +219,4 @@ body::-webkit-scrollbar {
     left: 0px;
   }
 }
+

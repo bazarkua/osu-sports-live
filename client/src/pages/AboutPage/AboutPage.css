@@ -1,0 +1,163 @@
+/* AboutPage.css */
+.about-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+h1 {
+  color: #ffffff;
+  border-radius: 0.625rem;
+  text-align: center;
+  background-color: #f0f0f3;
+  padding: 10px;
+  color: #23232e;
+  box-shadow: 0.15rem 0.15rem 0.55rem rgba(255, 115, 0, 0.925);
+}
+
+.h2__about {
+  background-color: #23232e;
+  color: #ffffff;
+  padding: 25px;
+  border-radius: 0.625rem;
+  max-width: 500px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.h2__about__end {
+  background-color: #23232e;
+  color: #23232e;
+  padding: 25px;
+  border-radius: 0.625rem;
+  max-width: 500px;
+  text-align: center;
+  margin: 30px auto;
+  border-color: #ff5000;
+  box-shadow: 0.15rem 0.15rem 0.55rem rgba(255, 115, 0, 0.925);
+}
+
+.parallax-section {
+  width: 100%;
+  height: 120vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  left: 150px;
+}
+
+.parallax-section-end {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background-color: #23232e;
+  left: 150px; /* Adjust the value to center the content properly */
+}
+
+.parallax-image-end {
+  width: 50%;
+  height: 100vh;
+}
+
+.parallax-image {
+  width: 50%;
+  height: 100vh;
+  padding-top: 150px;
+}
+
+.parallax-content {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #23232e;
+  background-color: #23232e;
+  padding-left: 10%;
+  padding-right: 10%;
+  height: 100%;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.p__parallax {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  background-color: #ffffff;
+  border-radius: 0.625rem;
+  padding: 35px;
+  color: #23232e;
+  border-color: #ff5000;
+  box-shadow: 0.15rem 0.15rem 0.55rem rgba(255, 115, 0, 0.925);
+}
+
+/* Media queries */
+@media (max-width: 1600px) {
+  .parallax-content {
+    padding: 20px;
+  }
+
+  .h2__about,
+  .h2__about__end {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .parallax-section,
+  .parallax-section-end {
+    flex-direction: column-reverse;
+    left: -3px;
+  }
+
+  .parallax-content {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+
+  .parallax-image,
+  .parallax-image-end {
+    width: 100%;
+    height: 50vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    align-items: center;
+  }
+
+  .parallax-section,
+  .parallax-section-end {
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    width: 100%;
+    height: auto;
+    padding: 0;
+  }
+
+  .parallax-content {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .parallax-image,
+  .parallax-image-end {
+    width: 100%;
+    height: 40vh;
+  }
+}

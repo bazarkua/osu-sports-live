@@ -1,111 +1,51 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
-const mongoose = require("mongoose");
+const cors = require("cors"); // Import the cors package
 
 const app = express();
 const port = 5000;
 
-// MongoDB connection URI
-const uri =
-  "mongodb+srv://adilbekbazarkulov1:Dv036TC8q6qCJg3j@cluster0.0ndjkpx.mongodb.net/emails?retryWrites=true&w=majority";
-
-// Create a MongoDB client
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-// Connect to MongoDB
-async function connectToMongoDB() {
-  try {
-    await client.connect();
-    console.log("Connected to MongoDB!");
-
-    // Call the function to start the server after connecting to MongoDB
-    startServer();
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-    process.exit(1); // Exit the process with an error code (1) if the connection fails
-  }
-}
-
-// Call the connectToMongoDB function to establish the connection
-connectToMongoDB();
-
-// Mongoose schema for email documents
-const emailSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-  },
-  msg: {
-    type: String,
-    required: true,
-  },
-});
-
-// Mongoose model for the "email" collection
-const EmailModel = mongoose.model("Email", emailSchema);
-
-// Express middleware to parse incoming request body as JSON
+// Middleware to parse incoming JSON data
 app.use(express.json());
 
-// CORS Configuration (Adjust origin as needed)
-app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, DELETE"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
+// Enable CORS for all routes
+app.use(cors());
 
-// Define your API routes here
+// MongoDB Atlas connection string
+const uri =
+  "mongodb+srv://adilbekbazarkulov1:voum1lsNZRtGlnkw@cluster0.0ndjkpx.mongodb.net/?retryWrites=true&w=majority";
+
+// Contact route handler
 app.post("/api/contact", async (req, res) => {
+  const { email, message } = req.body;
+
   try {
-    const { email, msg } = req.body;
-    console.log("Received contact form data:", { email, msg });
+    const client = new MongoClient(uri);
+    await client.connect();
 
-    // Retry Strategy: Try inserting the data with a timeout of 1 minute (60000 milliseconds)
-    const timeoutDuration = 60000;
-    let retryCount = 3;
+    // Replace "your_database_name" with the name of your MongoDB database
+    const db = client.db("emails");
+    const collection = db.collection("email");
 
-    while (retryCount > 0) {
-      try {
-        // Create a new document using the Mongoose model
-        const newEmail = new EmailModel({ email, msg });
+    await collection.insertOne({
+      email: email,
+      message: message,
+      createdAt: new Date(),
+    });
 
-        // Save the document to the database with the specified timeout
-        await newEmail.save({ w: "majority", wtimeout: timeoutDuration });
+    await client.close();
 
-        res.status(200).json({ msg: "Message received successfully!" });
-        return; // Exit the loop if the save operation is successful
-      } catch (error) {
-        console.error("Error saving contact form data:", error);
-        retryCount--;
-        if (retryCount > 0) {
-          console.log(`Retrying insertion. Attempts left: ${retryCount}`);
-        }
-        await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before retrying
-      }
-    }
-
-    // If all retries fail, send an error response
-    res
-      .status(500)
-      .json({ error: "Failed to save data after multiple retries." });
+    // Send a response back to the frontend
+    res.status(201).json({ message: "Message sent successfully!" });
   } catch (error) {
-    console.error("Error handling contact form data:", error);
+    console.error("Error:", error);
     res
       .status(500)
-      .json({ error: "An error occurred while processing the request." });
+      .json({ error: "Oops! Something went wrong while sending the message." });
   }
 });
 
 // Start the server
-function startServer() {
-  app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-  });
-}
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});

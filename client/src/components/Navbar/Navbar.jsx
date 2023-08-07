@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
   faPlayCircle,
   faCalendarAlt,
   faEnvelope,
+  faCircleInfo
 } from "@fortawesome/free-solid-svg-icons";
 import "./Navbar.css";
 import logo from "../../images/osu-logo.png";
@@ -14,6 +15,7 @@ function Navbar() {
   const [isHovered, setIsHovered] = useState(false);
   const [showText, setShowText] = useState(false);
   const timerRef = useRef();
+  const location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -59,45 +61,62 @@ function Navbar() {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink
-            exact
-            to="/"
-            activeClassName="nav-link"
-            style={{ textDecoration: "none" }}
+          <a
+            href="/"
+            className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
+            onClick={() => setShowText(!showText)} // Toggle showText on click
           >
-            <FontAwesomeIcon className="nav-icon" icon={faHome} />
+            <FontAwesomeIcon
+              className={`nav-icon ${location.pathname === "/" ? "active" : ""}`}
+              icon={faCircleInfo}
+            />
             {showText && <span className="link-text">About</span>}
-          </NavLink>
+          </a>
         </li>
         <li className="nav-item">
-          <NavLink
-            to="/live"
-            activeClassName="nav-link"
-            style={{ textDecoration: "none" }}
+          <a
+            href="/live"
+            className={`nav-link ${
+              location.pathname === "/live" ? "active" : ""
+            }`}
+            onClick={() => setShowText(!showText)} // Toggle showText on click
           >
-            <FontAwesomeIcon className="nav-icon" icon={faPlayCircle} />
+            <FontAwesomeIcon
+              className={`nav-icon ${location.pathname === "/live" ? "active" : ""}`}
+              icon={faPlayCircle}
+            />
             {showText && <span className="link-text">PAC 12 Live Events</span>}
-          </NavLink>
+          </a>
         </li>
         <li className="nav-item">
-          <NavLink
-            to="/upcoming"
-            activeClassName="nav-link"
-            style={{ textDecoration: "none" }}
+          <a
+            href="/upcoming"
+            className={`nav-link ${
+              location.pathname === "/upcoming" ? "active" : ""
+            }`}
+            onClick={() => setShowText(!showText)} // Toggle showText on click
           >
-            <FontAwesomeIcon className="nav-icon" icon={faCalendarAlt} />
+            <FontAwesomeIcon
+              className={`nav-icon ${location.pathname === "/upcoming" ? "active" : ""}`}
+              icon={faCalendarAlt}
+            />
             {showText && <span className="link-text">Upcoming Matches</span>}
-          </NavLink>
+          </a>
         </li>
         <li className="nav-item">
-          <NavLink
-            to="/contact"
-            activeClassName="nav-link"
-            style={{ textDecoration: "none" }}
+          <a
+            href="/contact"
+            className={`nav-link ${
+              location.pathname === "/contact" ? "active" : ""
+            }`}
+            onClick={() => setShowText(!showText)} // Toggle showText on click
           >
-            <FontAwesomeIcon className="nav-icon" icon={faEnvelope} />
+            <FontAwesomeIcon
+              className={`nav-icon ${location.pathname === "/contact" ? "active" : ""}`}
+              icon={faEnvelope}
+            />
             {showText && <span className="link-text">Contact Us</span>}
-          </NavLink>
+          </a>
         </li>
       </ul>
     </nav>

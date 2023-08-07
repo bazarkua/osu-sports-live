@@ -13,6 +13,16 @@ h2 {
   line-height: 1.1;
 }
 
+.upcomingEventsHeader {
+  text-align: center;
+  background-color: white;
+  border: solid 1px;
+  border-color: #ff5000;
+  color: #ff5000;
+  box-shadow: 0.55rem 0.55rem 0.55rem rgba(255, 115, 0, 0.925);
+  border-right: none;
+}
+
 p {
   font-family: var(--font-text);
   font-size: 1rem;
@@ -118,15 +128,15 @@ p {
   place-items: center;
   width: 40vw;
   max-width: 48.875rem;
-  height: 15.125rem;
+  height: 19.125rem;
   overflow: hidden;
   border-radius: 0.625rem;
   box-shadow: 0.25rem 0.25rem 0.75rem rgba(0, 0, 0, 0.925);
   font-size: smaller;
   position: relative; /* Add position relative to the card container */
-  border: 3px solid;
+  border: 5px solid;
   border-color: #23232e;
-  background-color: #ffffffde;
+  background-color: #23232e;
 }
 
 .card__background {
@@ -141,7 +151,7 @@ p {
   bottom: 0;
   left: 0;
   height: 0;
-  background-color: #23232eb0;
+  background-color: #23232eda;
   overflow: hidden;
   transition: height 500ms ease-out;
   padding-left: 100px;
@@ -263,12 +273,13 @@ p {
   opacity: 0;
   background-color: #ff5000;
   transition: transform 500ms ease-out, opacity 500ms ease-out;
+  cursor: pointer;
 }
 
 .card__button:hover{
-  background-color: #23232e;
-    transition: 300ms ease-in-out;
-    color: #ff5000;
+  background-color: #ffffff;
+  transition: 300ms ease-in-out;
+  color: #ff5000;
 }
 
 /* Event information overlay */

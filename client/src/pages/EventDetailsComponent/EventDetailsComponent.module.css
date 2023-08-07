@@ -61,12 +61,18 @@
   right: 5px;
   font-size: 20px;
   cursor: pointer;
+  color: #ff5000;
 }
 
 .popup button:hover {
-  background-color: #23232e;
-  transition: 300ms ease-in-out;
-  color: #ff5000;
+    background-color: white;
+    transition: 300ms ease-in-out;
+    color: #ff5000;
+}
+.popup .closeButton:hover {
+    background-color: transparent;
+    transition: 300ms ease-in-out;
+    color: #ffffff;
 }
 
 .buttonContainer {

@@ -5,8 +5,8 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ContactPage = () => {
-  const [email, setEmail] = useState(""); // Add useState for email
-  const [message, setMessage] = useState(""); // Add useState for message
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
 
@@ -27,7 +27,10 @@ const ContactPage = () => {
         theme: "light",
       });
 
-      // Send email data to the API route
+      // Log the data before sending to the backend
+      console.log("Data to be sent to backend:", { email, message });
+
+      // Send contact form data to the backend API
       await axios.post("http://localhost:5000/api/contact", {
         email: email,
         message: message,
@@ -54,7 +57,11 @@ const ContactPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Contact Us</h1>
+      <h1>Contact Me</h1>
+      <h2>
+        Let me know if you have any questions, I will try to respond as fast as
+        I can :)
+      </h2>
       <form onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="email">Email:</label>

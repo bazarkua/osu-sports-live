@@ -200,12 +200,6 @@ export default function UpcomingMatchesPage() {
     }
   };
 
-  const findTeamNames = async (schoolId1, schoolId2) => {
-    const name1 = await fetchSchoolName(schoolId1);
-    const name2 = await fetchSchoolName(schoolId2);
-    return [name1, name2];
-  };
-
   useEffect(() => {
     const fetchTeamNames = async () => {
       const teamNamesArray = await Promise.all(
@@ -267,6 +261,7 @@ export default function UpcomingMatchesPage() {
 
   return (
     <>
+      <h1 className={styles.upcomingEventsHeader}>Upcoming Events</h1>
       <div className={styles.sportListContainer}>
         <div className={styles.sportIcons}>
           {isLoadingSports ? (
@@ -342,14 +337,15 @@ export default function UpcomingMatchesPage() {
                       <div className={styles.card__overlay}>
                         <div className={styles.card__overlayContent}>
                           {/* Update the time display */}
-                          <p className={styles.card__description}>
+                          {/* <p className={styles.card__description}>
                             {event.schools[0].id}
                           </p>
                           <p className={styles.card__description}>
                             {event.schools[1].id}
-                          </p>
+                          </p> */}
                           <p className={styles.card__description}>
-                            Match Start Time: {formatTime(event.event_date.start_time)}{" "}
+                            Match Start Time:{" "}
+                            {formatTime(event.event_date.start_time)}{" "}
                             {formatTimeZone(event.event_date.time_zone)}
                           </p>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
-import HomePage from "../pages/HomePage/HomePage";
+import AboutPage from "../pages/AboutPage/AboutPage";
 import LiveScoresPage from "../pages/LiveEventsPage/LiveEventsPage.jsx";
 import UpcomingMatchesPage from "../pages/UpcomingMatchesPage/UpcomingMatchesPage";
 import Navbar from "../components/Navbar/Navbar";
@@ -13,7 +13,7 @@ const Main = () => {
       <div className="background-image">
         <Navbar />
         <Routes>
-          <Route exact path="/" element={<HomePage />} />
+          <Route exact path="/" element={<AboutPage />} />
           <Route path="/live" element={<LiveScoresPage />} />
           <Route path="/upcoming" element={<UpcomingMatchesPage />} />
           {/* <Route path="/past" element={<PastMatchesPage />} /> */}

@@ -19,7 +19,7 @@ footer {
   z-index: 0;
   overflow: hidden;
   min-height: calc(100vh); /* Adjust the value based on your header and footer height */
-  background-image: url("../src/images/beaver.jpg");
+  background-image: url("../src/images/go_beaves.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -34,12 +34,12 @@ footer {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("../src/images/beaver.jpg");
+  background-image: url("../src/images/go_beaves.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  filter: blur(4px); /* Adjust the blur strength as per your preference */
+  filter: blur(0px); /* Adjust the blur strength as per your preference */
   z-index: -1; /* Place the pseudo-element below the other content */
 }
 

@@ -38,7 +38,6 @@ export default function LiveEventsPage() {
             pagesize: 10,
             sort: "ASC",
             ignore_hidden_canceled: true,
-            
           },
           headers: {
             Accept: "application/json",
@@ -113,18 +112,34 @@ export default function LiveEventsPage() {
     console.log("Filtered Events:", filteredEvents);
   }, [selectedSportId, events]);
 
-  const formatTime = (timeString) => {
-    const options = {
+  const formatTime = (event) => {
+    const optionsDate = {
       weekday: "short",
-      day: "2-digit",
+      day: "numeric",
       month: "short",
+    };
+
+    const optionsTime = {
       hour: "numeric",
       minute: "numeric",
       hour12: true,
-      timeZoneName: "short",
     };
-    const formattedTime = new Date(timeString).toLocaleString("en-US", options);
-    return formattedTime.replace("GMT", "");
+
+    const startTime = new Date(event.program_times[0].start_time);
+    const formattedStartDate = startTime.toLocaleString("en-US", optionsDate);
+    const formattedStartTime = startTime.toLocaleString("en-US", optionsTime);
+
+    let formattedEndTime = "Invalid (PDT)";
+    if (event?.program_times[0]?.end_time) {
+      const endTime = new Date(event.program_times[0].end_time);
+      formattedEndTime = endTime.toLocaleString("en-US", optionsTime);
+      formattedEndTime = formattedEndTime.replace(":00 ", " "); // Remove ":00" from the time
+    }
+
+    // Format the time range
+    const timeRange = `${formattedStartDate}, ${formattedStartTime} to ${formattedEndTime} (PDT)`;
+
+    return timeRange.replace("GMT", "");
   };
 
   const formatDuration = (duration) => {
@@ -143,9 +158,40 @@ export default function LiveEventsPage() {
     setSelectedEvent(event);
   };
 
-  const handleReadMoreClick = () => {
-    if (selectedEvent) {
-      window.open(selectedEvent.url);
+  const fetchNetworkDetails = async (networkId) => {
+    try {
+      const response = await axios.get(
+        `http://api.pac-12.com/v3/networks/${networkId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching network details:", error);
+      return null;
+    }
+  };
+
+  const handleReadMoreClick = async () => {
+    if (
+      selectedEvent &&
+      selectedEvent.program_times &&
+      selectedEvent.program_times.length > 0
+    ) {
+      const programTimes = selectedEvent.program_times[0];
+      if (programTimes.networks && programTimes.networks.length > 0) {
+        // Assuming the first network in the networks array is the one you want to use for the redirect
+        const networkId = programTimes.networks[0].id;
+        console.log("Network ID:", networkId);
+
+        const networkDetails = await fetchNetworkDetails(networkId);
+        console.log("Network Details:", networkDetails);
+
+        if (networkDetails && networkDetails.url) {
+          console.log("Redirecting to URL:", networkDetails.url);
+          window.open(networkDetails.url);
+        } else {
+          console.error("Error: Network URL not available.");
+        }
+      }
     }
   };
 
@@ -178,8 +224,8 @@ export default function LiveEventsPage() {
     },
     // Add other sports here
     {
-      label: "Women's Cross Country",
-      value: "Women's Cross Country",
+      label: "Cross Country",
+      value: "Cross Country",
       icon: faRunning,
     },
     { label: "Men's Golf", value: "Men's Golf", icon: faGolfBall },
@@ -191,14 +237,15 @@ export default function LiveEventsPage() {
     },
     { label: "Women's Rowing", value: "Women's Rowing", icon: faShip },
     {
-      label: "Women's Softball",
-      value: "Women's Softball",
+      label: "Softball",
+      value: "Softball",
       icon: faBaseballBall,
     },
   ];
 
   return (
     <>
+      <h1 className={styles.liveEventsHeader}>PAC-12 Live Events</h1>
       <div className={styles.sportListContainer}>
         <div className={styles.sportIcons}>
           {sportOptions.map((option) => (
@@ -215,7 +262,6 @@ export default function LiveEventsPage() {
           ))}
         </div>
       </div>
-
       <div className={styles.container}>
         <div className={styles.eventListContainer}>
           {isLoading ? (
@@ -246,20 +292,20 @@ export default function LiveEventsPage() {
                     />
                     <div className={styles.card__overlay}>
                       <div className={styles.card__overlayContent}>
-                      {event.program_times &&
-                        event.program_times.length > 0 && (
-                          <>
-                            {/* Update the time and duration display */}
-                            <p className={styles.card__description}>
-                              {formatTime(event.program_times[0].start_time)} to{" "}
-                              {formatTime(event.program_times[0].end_time)}
-                            </p>
-                            <p className={styles.card__description}>
-                              Duration: {formatDuration(event.duration)}
-                            </p>
+                        {event.program_times &&
+                          event.program_times.length > 0 && (
+                            <>
+                              {/* Update the time and duration display */}
+                              <p className={styles.card__description}>
+                                {formatTime(event)}
+                              </p>
+
+                              <p className={styles.card__description}>
+                                Duration: {formatDuration(event.duration)}
+                              </p>
                               <button
                                 className={styles.card__button}
-                                onClick={handleReadMoreClick}
+                                onClick={handleReadMoreClick} // Remove () here to pass the function reference
                               >
                                 Launch Pac-12 Live
                               </button>
@@ -270,11 +316,11 @@ export default function LiveEventsPage() {
                   </div>
                 ))
               ) : (
-                <p>
+                <h2 className={styles.not__avail}>
                   {selectedSport
                     ? `No live events currently available for ${selectedSport}.`
                     : "No live events currently available."}
-                </p>
+                </h2>
               )}
             </div>
           )}

@@ -15,6 +15,16 @@ h2 {
   line-height: 1.1;
 }
 
+.liveEventsHeader {
+  text-align: center;
+  background-color: white;
+  border: solid 1px;
+  border-color: #ff5000;
+  color: #ff5000;
+  box-shadow: 0.55rem 0.55rem 0.55rem rgba(255, 115, 0, 0.925);
+  border-right: none;
+}
+
 p {
   font-family: var(--font-text);
   font-size: 1rem;
@@ -35,9 +45,16 @@ p {
   display: flex;
   flex-direction: column; /* Updated to column */
   padding-bottom: 40px;
-  
-  
-  
+}
+
+.not__avail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #23232ed2;
+  width: 50vw; /* Change the width to 100% to occupy the full screen */
+  height: 200px;
+  border-radius: 0.625rem;
 }
 
 
@@ -124,13 +141,13 @@ p {
   place-items: center;
   width: 40vw;
   max-width: 48.875rem;
-  height: 15.125rem;
+  height: 19.125rem;
   overflow: hidden;
-  border-radius: 0.625rem;
-  box-shadow: 0.25rem 0.25rem 0.75rem rgba(0, 0, 0, 0.925);
+  border-radius: 0.525rem;
+  box-shadow: 0.25rem 0.25rem 0.75rem rgba(8, 8, 8, 0.925);
   font-size: smaller;
   position: relative; /* Add position relative to the card container */
-  border: 3px solid;
+  border: 1px solid;
   border-color: #23232e;
 }
 
@@ -340,9 +357,12 @@ p {
 }
 
 .card__button:hover{
-  background-color: #23232e;
+  background-color: #ffffff;
     transition: 300ms ease-in-out;
     color: #ff5000;
+}
+.card__button {
+  cursor: pointer;
 }
 
 .card:hover .card__title::after,

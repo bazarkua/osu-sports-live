@@ -4,6 +4,7 @@
   height: 100px;
   text-align: center;
   width: 100%;
+  border-top: solid 5px #ff5000;
 }
 
 .container {
