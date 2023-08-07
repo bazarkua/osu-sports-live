@@ -56,12 +56,13 @@ h1 {
   display: flex;
   align-items: center;
   background-color: #23232e;
-  left: 150px; /* Adjust the value to center the content properly */
+  /* Adjust the value to center the content properly */
 }
 
 .parallax-image-end {
   width: 50%;
   height: 100vh;
+  left: 150px;
 }
 
 .parallax-image {
@@ -76,7 +77,7 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  text-align: left;
   color: #23232e;
   background-color: #23232e;
   padding-left: 10%;
@@ -106,10 +107,6 @@ h1 {
     padding: 20px;
   }
 
-  .h2__about,
-  .h2__about__end {
-    max-width: 100%;
-  }
 }
 
 @media (max-width: 1200px) {
@@ -127,7 +124,7 @@ h1 {
 
   .parallax-image,
   .parallax-image-end {
-    width: 100%;
+    width: 1600px;
     height: 50vh;
   }
 }
@@ -157,7 +154,7 @@ h1 {
 
   .parallax-image,
   .parallax-image-end {
-    width: 100%;
+    width: 1000px;
     height: 40vh;
   }
 }

@@ -7,9 +7,7 @@
     "mongoose": "^7.4.1"
   },
   "scripts": {
-    "start": "node server.js",
-    "vercel-build": "npm run build && cd client && npm install && npm run build",
-    "vercel-start": "node server.js"
+    "start": "node server.js"
   },
   "name": "osu-sports-live",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
@@ -17,8 +15,5 @@
   "main": "server.js",
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "serve": "^14.2.0"
-  }
+  "license": "ISC"
 }
