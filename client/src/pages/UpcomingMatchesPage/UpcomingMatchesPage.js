@@ -43,22 +43,22 @@ const sportOptions = [
 ];
 
 export default function UpcomingMatchesPage() {
-  const [sports, setSports] = useState([]);
+  const [, setSports] = useState([]);
   const [events, setEvents] = useState([]);
   const [selectedSport, setSelectedSport] = useState("");
   const [isLoadingSports, setIsLoadingSports] = useState(true);
   const [isLoadingEvents, setIsLoadingEvents] = useState(true);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [schoolNames, setSchoolNames] = useState({});
+
   const [teamNamesArray, setTeamNames] = useState([]);
   // Add state to store the school images and loading status
   const [schoolImages, setSchoolImages] = useState({});
-  const [isLoadingSchoolImages, setIsLoadingSchoolImages] = useState(true);
+  const [, setIsLoadingSchoolImages] = useState(true);
 
   useEffect(() => {
     const fetchSports = async () => {
       try {
-        const response = await axios.get("http://api.pac-12.com/v3/sports", {
+        const response = await axios.get("https://api.pac-12.com/v3/sports", {
           params: {
             sort: "ASC",
             featured_only: false,
@@ -85,7 +85,7 @@ export default function UpcomingMatchesPage() {
 
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("http://api.pac-12.com/v3/events", {
+        const response = await axios.get("https://api.pac-12.com/v3/events", {
           params: {
             page: 1,
             pagesize: 30,
@@ -180,7 +180,7 @@ export default function UpcomingMatchesPage() {
     // Function to fetch individual school name by ID and store it in schoolNames state
     try {
       const response = await axios.get(
-        `http://api.pac-12.com/v3/schools/${schoolId}`,
+        `https://api.pac-12.com/v3/schools/${schoolId}`,
         {
           headers: {
             Accept: "application/json",
@@ -220,7 +220,7 @@ export default function UpcomingMatchesPage() {
     const fetchSchoolImages = async (schoolId) => {
       try {
         const response = await axios.get(
-          `http://api.pac-12.com/v3/schools/${schoolId}`,
+          `https://api.pac-12.com/v3/schools/${schoolId}`,
           {
             headers: {
               Accept: "application/json",
