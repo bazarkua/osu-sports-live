@@ -1,5 +1,41 @@
 /* LiveEventsPage.module.css */
 
+
+.liveEventsHeader {
+  text-align: center;
+  background-color: white;
+  border: solid 1px;
+  border-color: #ff5000;
+  color: #ff5000;
+  box-shadow: 0.55rem 0.55rem 0.55rem rgba(255, 115, 0, 0.925);
+  border-right: none;
+}
+
+
+/* CARD STYLES */
+
+.card {
+  display: grid;
+  place-items: center;
+  width: 40vw;
+  max-width: 48.875rem;
+  height: 19.125rem;
+  overflow: hidden;
+  border-radius: 0.525rem;
+  box-shadow: 0.25rem 0.25rem 0.75rem rgba(8, 8, 8, 0.925);
+  font-size: smaller;
+  position: relative; /* Add position relative to the card container */
+  border: 1px solid;
+  border-color: #23232e;
+}
+
+.card__background {
+  object-fit: cover;
+  max-width: 100%;
+  height: 100%;
+  transition: transform 500ms ease-in;
+}
+
 /* Box sizing rules */
 *,
 *::before,
@@ -15,15 +51,6 @@ h2 {
   line-height: 1.1;
 }
 
-.liveEventsHeader {
-  text-align: center;
-  background-color: white;
-  border: solid 1px;
-  border-color: #ff5000;
-  color: #ff5000;
-  box-shadow: 0.55rem 0.55rem 0.55rem rgba(255, 115, 0, 0.925);
-  border-right: none;
-}
 
 p {
   font-family: var(--font-text);
@@ -43,31 +70,18 @@ p {
   margin: 0 auto;
   height: auto;
   display: flex;
-  flex-direction: column; /* Updated to column */
+  flex-direction: column;
   padding-bottom: 40px;
+  
 }
-
-.not__avail {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #23232ed2;
-  width: 50vw; /* Change the width to 100% to occupy the full screen */
-  height: 200px;
-  border-radius: 0.625rem;
-}
-
 
 .sportListContainer {
-   /* push the content to the right */
+  /* push the content to the right */
   padding-left: 42px; /* adjust as per your needs */
   top: 0px;
   padding-bottom: 26px;
   z-index: 1; /* Add to stack it below the navbar */
-  
-  
 }
-
 
 .loadingContainer {
   display: flex;
@@ -121,7 +135,7 @@ p {
 }
 .eventListContainer {
   flex: 1; /* Updated to 1 */
-  
+
   padding-top: 50px;
 }
 .eventList {
@@ -132,24 +146,23 @@ p {
   
   gap: 20px;
   margin-left: 18rem;
+  
 }
 
-/* CARD STYLES */
 
-.card {
-  display: grid;
-  place-items: center;
-  width: 40vw;
-  max-width: 48.875rem;
-  height: 19.125rem;
+
+.card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 0;
+  background-color: #23232eda;
   overflow: hidden;
-  border-radius: 0.525rem;
-  box-shadow: 0.25rem 0.25rem 0.75rem rgba(8, 8, 8, 0.925);
-  font-size: smaller;
-  position: relative; /* Add position relative to the card container */
-  border: 1px solid;
-  border-color: #23232e;
+  transition: height 500ms ease-out;
+  padding-left: 100px;
+  width: 100%;
 }
+
 
 .card__background {
   object-fit: cover;
@@ -157,23 +170,23 @@ p {
   height: 100%;
   transition: transform 500ms ease-in;
 }
-
-.card__overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 0;
-  background-color: rgba(
-    33,
-    33,
-    33,
-    0.75
-  ); /* Change the background color to black */
+.card {
+  display: grid;
+  
+  place-items: center;
+  width: 40vw;
+  max-width: 48.875rem;
+  height: 19.125rem;
   overflow: hidden;
-  transition: height 500ms ease-out;
-  padding-left: 100px;
-  width: 100%;
+  border-radius: 0.625rem;
+  box-shadow: 0.25rem 0.25rem 0.75rem rgba(0, 0, 0, 0.925);
+  font-size: smaller;
+  position: relative; /* Add position relative to the card container */
+  border: 5px solid;
+  border-color: #23232e;
+  background-color: #23232e;
 }
+
 
 .card:hover .card__overlay {
   height: 100%;
@@ -197,10 +210,15 @@ p {
   top: 16px; /* Move the title to the top of the card */
   left: 16px; /* Add some padding from the top and left edges */
   color: white;
-  background-color: rgba(0, 0, 0, 0.7); /* Add a background color for the title */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Add a background color for the title */
   padding: 8px 16px; /* Add some padding around the title */
   border-radius: 0.625rem; /* Add border radius to match the card border */
-  transition: opacity 5000ms ease-in-out; /* Add opacity transition */
+  transition: opacity 500ms ease-in-out; /* Add opacity transition */
 }
 
 .card:hover .card__title {
@@ -212,12 +230,12 @@ p {
   position: absolute;
   top: 0;
   left: 0;
-  width: 150%;
+  width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7); /* Match the title's background color */
   border-radius: 0.625rem; /* Add border radius to match the card border */
   opacity: 1; /* Set opacity to 1 to keep the overlay visible on hover */
-  transition: opacity 5000ms ease-in-out; /* Add opacity transition */
+  transition: opacity 500ms ease-in-out; /* Add opacity transition */
 }
 
 .card:hover .card__title::after {
@@ -262,10 +280,16 @@ p {
   font-size: 1.125rem;
   color: var(--black);
   opacity: 0;
-  transition: transform 200ms ease-out, opacity 200ms ease-out;
   background-color: #ff5000;
+  transition: transform 500ms ease-out, opacity 500ms ease-out;
+  cursor: pointer;
 }
 
+.card__button:hover{
+  background-color: #ffffff;
+  transition: 300ms ease-in-out;
+  color: #ff5000;
+}
 
 /* Event information overlay */
 
@@ -296,7 +320,7 @@ p {
 }
 
 .overlay p {
-  margin: 0px 0;
+  margin: 5px 0;
 }
 
 .overlay ul {
@@ -356,15 +380,6 @@ p {
   transition-delay: 200ms;
 }
 
-.card__button:hover{
-  background-color: #ffffff;
-    transition: 300ms ease-in-out;
-    color: #ff5000;
-}
-.card__button {
-  cursor: pointer;
-}
-
 .card:hover .card__title::after,
 .card:focus-within .card__title::after {
   opacity: 1;
@@ -392,7 +407,7 @@ p {
   }
 
   .card {
-    width: 90vw; /* Adjust card width for smaller screens */
+    width: 100vw; /* Adjust card width for smaller screens */
     max-width: none; /* Remove max-width for smaller screens */
     height: auto; /* Adjust height to auto for smaller screens */
     right: 7vh;

@@ -106,6 +106,10 @@ h1 {
   .parallax-content {
     padding: 20px;
   }
+  .h2__about__end{
+    padding-left: 150px;
+    
+  }
 
 }
 
@@ -114,6 +118,11 @@ h1 {
   .parallax-section-end {
     flex-direction: column-reverse;
     left: -3px;
+  }
+  
+  .h2__about__end{
+    padding-left: 35px;
+    
   }
 
   .parallax-content {

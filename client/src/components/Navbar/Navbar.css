@@ -41,7 +41,9 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
   height: 100%;
-  
+}
+.navbar:hover .link-text {
+  display: var(--show-link-text, none);
 }
 
 .nav-item {
@@ -67,7 +69,7 @@ body::-webkit-scrollbar {
   height: 5rem;
   color: #ff5000;
   text-decoration: none !important;
-  
+
   transition: var(--transition-speed);
   min-width: 6rem;
   flex-wrap: nowrap;
@@ -219,4 +221,3 @@ body::-webkit-scrollbar {
     left: 0px;
   }
 }
-

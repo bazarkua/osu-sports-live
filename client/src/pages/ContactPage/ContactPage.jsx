@@ -31,7 +31,7 @@ const ContactPage = () => {
       console.log("Data to be sent to backend:", { email, message });
 
       // Send contact form data to the backend API
-      await axios.post("http://localhost:5000/api/contact", {
+      await axios.post("/api/contact", {
         email: email,
         message: message,
       });

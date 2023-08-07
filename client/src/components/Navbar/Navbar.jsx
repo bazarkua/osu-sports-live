@@ -5,7 +5,7 @@ import {
   faPlayCircle,
   faCalendarAlt,
   faEnvelope,
-  faCircleInfo
+  faCircleInfo,
 } from "@fortawesome/free-solid-svg-icons";
 import "./Navbar.css";
 import logo from "../../images/osu-logo.png";
@@ -13,44 +13,38 @@ import logo from "../../images/osu-logo.png";
 function Navbar() {
   const [isHovered, setIsHovered] = useState(false);
   const [showText, setShowText] = useState(false);
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
   const timerRef = useRef();
   const location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 1200) {
-        // For larger screens, use the original logic based on isHovered
-        if (isHovered) {
-          timerRef.current = setTimeout(() => {
-            setShowText(true);
-          }, 400);
-        } else {
-          clearTimeout(timerRef.current);
-          setShowText(false);
-        }
-      } else {
-        // For smaller screens, always hide the text
+      setWindowSize(window.innerWidth);
+      if (window.innerWidth <= 1200) {
+        clearTimeout(timerRef.current);
         setShowText(false);
       }
     };
 
-    handleResize(); // Call it initially to set the correct state based on the screen size
-
-    // Add event listener to handle window resize
     window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-    return () => {
-      // Clean up the event listener on component unmount
-      window.removeEventListener("resize", handleResize);
+  useEffect(() => {
+    if (isHovered && windowSize > 1200) {
+      timerRef.current = setTimeout(() => setShowText(true), 400);
+    } else {
       clearTimeout(timerRef.current);
-    };
-  }, [isHovered]);
+      setShowText(false);
+    }
+  }, [isHovered, windowSize]);
 
   return (
     <nav
       className="navbar"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      style={{ '--show-link-text': showText ? 'inline' : 'none' }}
     >
       <ul className="navbar-nav">
         <li className="logo">
@@ -63,7 +57,6 @@ function Navbar() {
           <a
             href="/"
             className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
-            onClick={() => setShowText(!showText)} // Toggle showText on click
           >
             <FontAwesomeIcon
               className={`nav-icon ${location.pathname === "/" ? "active" : ""}`}
@@ -78,7 +71,6 @@ function Navbar() {
             className={`nav-link ${
               location.pathname === "/live" ? "active" : ""
             }`}
-            onClick={() => setShowText(!showText)} // Toggle showText on click
           >
             <FontAwesomeIcon
               className={`nav-icon ${location.pathname === "/live" ? "active" : ""}`}
@@ -93,7 +85,6 @@ function Navbar() {
             className={`nav-link ${
               location.pathname === "/upcoming" ? "active" : ""
             }`}
-            onClick={() => setShowText(!showText)} // Toggle showText on click
           >
             <FontAwesomeIcon
               className={`nav-icon ${location.pathname === "/upcoming" ? "active" : ""}`}
@@ -108,7 +99,6 @@ function Navbar() {
             className={`nav-link ${
               location.pathname === "/contact" ? "active" : ""
             }`}
-            onClick={() => setShowText(!showText)} // Toggle showText on click
           >
             <FontAwesomeIcon
               className={`nav-icon ${location.pathname === "/contact" ? "active" : ""}`}

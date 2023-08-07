@@ -32,7 +32,7 @@ export default function LiveEventsPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://api.pac-12.com/v3/onnow", {
+        const response = await axios.get("https://api.pac-12.com/v3/onnow", {
           params: {
             page: 1,
             pagesize: 10,
@@ -64,7 +64,7 @@ export default function LiveEventsPage() {
   useEffect(() => {
     const fetchAllSports = async () => {
       try {
-        const response = await axios.get("http://api.pac-12.com/v3/sports");
+        const response = await axios.get("https://api.pac-12.com/v3/sports");
 
         if (response.data?.sports) {
           setAllSports(response.data.sports);
@@ -161,7 +161,7 @@ export default function LiveEventsPage() {
   const fetchNetworkDetails = async (networkId) => {
     try {
       const response = await axios.get(
-        `http://api.pac-12.com/v3/networks/${networkId}`
+        `https://api.pac-12.com/v3/networks/${networkId}`
       );
       return response.data;
     } catch (error) {
