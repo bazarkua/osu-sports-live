@@ -409,7 +409,7 @@ p {
   .card {
     width: 100vw; /* Adjust card width for smaller screens */
     max-width: none; /* Remove max-width for smaller screens */
-    height: auto; /* Adjust height to auto for smaller screens */
+    height: 200px; /* Adjust height to auto for smaller screens */
     right: 7vh;
   }
 
