@@ -316,11 +316,11 @@ export default function LiveEventsPage() {
                   </div>
                 ))
               ) : (
-                <h2 className={styles.not__avail}>
+                <div className={styles.not__avail}>
                   {selectedSport
                     ? `No live events currently available for ${selectedSport}.`
                     : "No live events currently available."}
-                </h2>
+                </div>
               )}
             </div>
           )}
