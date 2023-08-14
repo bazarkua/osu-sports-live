@@ -1,5 +1,9 @@
 /* LiveEventsPage.module.css */
 
+body{
+  background-color: #23232e
+}
+
 
 .liveEventsHeader {
   text-align: center;

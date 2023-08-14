@@ -56,6 +56,7 @@ const ContactPage = () => {
   };
 
   return (
+    <div className={styles.backgroundImage}>
     <div className={styles.container}>
       <h1>Contact Me</h1>
       <h2>
@@ -92,6 +93,7 @@ const ContactPage = () => {
         )}
       </form>
       <ToastContainer />
+    </div>
     </div>
   );
 };

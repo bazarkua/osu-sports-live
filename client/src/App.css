@@ -14,34 +14,7 @@ footer {
   flex-shrink: 0;
 }
 
-.background-image {
-  position: relative;
-  z-index: 0;
-  overflow: hidden;
-  min-height: calc(100vh); /* Adjust the value based on your header and footer height */
-  background-image: url("../src/images/go_beaves.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed; /* Ensure the image stays fixed while scrolling */
-  
-}
 
-.background-image::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("../src/images/go_beaves.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  filter: blur(0px); /* Adjust the blur strength as per your preference */
-  z-index: -1; /* Place the pseudo-element below the other content */
-}
 
 
 
